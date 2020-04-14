@@ -16,6 +16,38 @@ public class JDBCTest {
 	private String id = "JEONJU";
 	private String pwd = "JEONJU";
 	
+	public void selectAll()
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try 
+		{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,id,pwd);
+			
+			String query = "SELECT * FROM SEAT";
+			
+			pstmt = conn.prepareStatement(query);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next())
+			{
+				System.out.println("테이블 번호  : " + rset.getInt("tableNum"));
+				System.out.println("가격 : " + rset.getInt("price"));
+			}
+		} 
+		catch (ClassNotFoundException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public void tableInsert(Seat seat)
 	{
 		Connection conn = null;
@@ -38,10 +70,12 @@ public class JDBCTest {
 			if(result > 0)
 			{
 				System.out.println(seat.getTableNum() + "테이블 입장!!");
+				conn.commit();
 			}
 			else
 			{
 				System.out.println("나가!!!!!!!!");
+				conn.rollback();
 			}
 		} 
 		catch (ClassNotFoundException e) 
@@ -87,10 +121,12 @@ public class JDBCTest {
 			if(result > 0)
 			{
 				System.out.println("table price update 성공");
+				conn.commit();
 			}
 			else
 			{
 				System.out.println("talbe price update 실패");
+				conn.rollback();
 			}
 		} 
 		catch (ClassNotFoundException e) 
@@ -139,10 +175,12 @@ public class JDBCTest {
 			if(result > 0)
 			{
 				System.out.println(menuOrder.getTableNum() + "번 테이블에 "+menuOrder.getMenu() + "주문이 들어갔습니다.");
+				conn.commit();
 			}
 			else
 			{
 				System.out.println("주문 실패");
+				conn.rollback();
 			}
 		} 
 		catch (ClassNotFoundException e) 
@@ -292,10 +330,12 @@ public class JDBCTest {
 			if(result > 0)
 			{
 				System.out.println(tableNum + "번 테이블 삭제");
+				conn.commit();
 			}
 			else
 			{
 				System.out.println("실패");
+				conn.rollback();
 			}
 		} 
 		catch (ClassNotFoundException e) 
@@ -324,7 +364,7 @@ public class JDBCTest {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "DELETE SEAT\r\n" + 
+		String query = "DELETE MENUORDER\r\n" + 
 				"WHERE TABLENUM = ?";
 		try
 		{
@@ -339,10 +379,12 @@ public class JDBCTest {
 			if(result > 0)
 			{
 				System.out.println(tableNum + "번의 주문내역 삭제");
+				conn.commit();
 			}
 			else
 			{
 				System.out.println("실패");
+				conn.rollback();
 			}
 			
 		} 
