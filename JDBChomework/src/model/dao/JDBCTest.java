@@ -409,7 +409,52 @@ public class JDBCTest {
 		
 	}
 	
-	
+	public int resultPrice(int tableNum)
+	{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		int resultprice = 0;
+		String query = "SELECT PRICE FROM MENUORDER WHERE TABLENUM = ?";
+		try 
+		{
+			Class.forName(driver);
+			conn = DriverManager.getConnection(url,id,pwd);
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, tableNum);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next())
+			{
+				resultprice += rset.getInt("price");
+			}
+		}
+		catch (ClassNotFoundException e) 
+		{
+			e.printStackTrace();
+		}
+		catch (SQLException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			try {
+				conn.close();
+				pstmt.close();
+				rset.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return resultprice;
+	}
 	
 	
 	

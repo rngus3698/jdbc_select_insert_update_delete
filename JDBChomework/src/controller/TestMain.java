@@ -46,6 +46,8 @@ public class TestMain {
 	{
 		System.out.print("테이블 번호 : ");
 		int tableNum = sc.nextInt();
+		//테이블의 총가격 출력
+		System.out.println(test.resultPrice(tableNum));
 		//seat테이블 삭제
 		test.seatTableDelete(tableNum);
 		//menuOrder테이블에 tableNum에 해당하는 행 삭제
