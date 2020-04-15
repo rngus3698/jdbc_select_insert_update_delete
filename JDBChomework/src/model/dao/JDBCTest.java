@@ -308,13 +308,13 @@ public class JDBCTest {
 		return tableTotalPrice;
 	}
 	
-	public void seatTableDelete(int tableNum)
+	public void seatTablePriceUpdate(int tableNum)
 	{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = "DELETE SEAT WHERE TABLENUM = ?";
+		String query = "UPDATE SEAT SET PRICE = 0 WHERE TABLENUM = ?";
 		
 		try
 		{
@@ -329,7 +329,7 @@ public class JDBCTest {
 			
 			if(result > 0)
 			{
-				System.out.println(tableNum + "번 테이블 삭제");
+				System.out.println(tableNum + "번 계산완료");
 				conn.commit();
 			}
 			else

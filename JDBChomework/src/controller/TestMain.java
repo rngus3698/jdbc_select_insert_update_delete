@@ -17,7 +17,7 @@ public class TestMain {
 		
 		while(true)
 		{
-			System.out.println("1. tableSelcet");
+//			System.out.println("1. tableSelcet");
 			System.out.println("2. order");
 			System.out.println("3. calc");
 			System.out.println("4. 종료");
@@ -27,7 +27,7 @@ public class TestMain {
 			switch(anwer)
 			{
 			case 1:
-				tm.tableInsert();
+//				tm.tableInsert();
 				break;
 			case 2:
 				tm.order();
@@ -49,7 +49,7 @@ public class TestMain {
 		//테이블의 총가격 출력
 		System.out.println(test.resultPrice(tableNum));
 		//seat테이블 삭제
-		test.seatTableDelete(tableNum);
+		test.seatTablePriceUpdate(tableNum);
 		//menuOrder테이블에 tableNum에 해당하는 행 삭제
 		test.menuOrderTableDelete(tableNum);
 	}
@@ -75,12 +75,12 @@ public class TestMain {
 		
 	}
 
-	public  void tableInsert()
-	{
-		System.out.print("몇 번테이블 입니까?");
-		int tableNum = sc.nextInt();
-		Seat table = new Seat(tableNum,0);
-		test.tableInsert(table);
-	}
+//	public  void tableInsert()
+//	{
+//		System.out.print("몇 번테이블 입니까?");
+//		int tableNum = sc.nextInt();
+//		Seat table = new Seat(tableNum,0);
+//		test.tableInsert(table);
+//	}
 
 }
